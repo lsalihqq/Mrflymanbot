@@ -9,7 +9,7 @@
     "manager",
     "3"
   ],
-  "repository": "https://github.com/mrflyman/Mrflymanbot",
+  "repository": "hhttps://github.com/mrflyman/Mrflymanbot",
   "env": {
     "ENV": {
       "description": "Setting this to ANYTHING will enable env variables",
