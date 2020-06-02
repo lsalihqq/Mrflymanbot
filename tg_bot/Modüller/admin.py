@@ -79,7 +79,7 @@ def demote(bot: Bot, update: Update, args: List[str]) -> str:
 
     user_member = chat.get_member(user_id)
     if user_member.status == 'creator':
-        message.reply_text("grubun yaratıcısı yasak.... 😬")
+        message.reply_text("grubun yaratıcısına yasak.... 😬")
         return ""
 
     if not user_member.status == 'administrator':
@@ -182,15 +182,15 @@ def invite(bot: Bot, update: Update):
             invitelink = bot.exportChatInviteLink(chat.id)
             update.effective_message.reply_text(invitelink)
         else:
-            update.effective_message.reply_text("I don't have access to the invite link, try changing my permissions!")
+            update.effective_message.reply_text("Davet bağlantısına erişimim yok, izinlerimi değiştirmeyi deneyin!")
     else:
-        update.effective_message.reply_text("I can only give you invite links for supergroups and channels, sorry!")
+        update.effective_message.reply_text("Ben sadece süper gruplar ve kanallar için davet bağlantıları verebilir, üzgünüm!")
 
 
 @run_async
 def adminlist(bot: Bot, update: Update):
     administrators = update.effective_chat.get_administrators()
-    text = "Admins in *{}*:".format(update.effective_chat.title or "this chat")
+    text = "yönetici *{}*:".format(update.effective_chat.title or " ")
     for admin in administrators:
         user = admin.user
         status = admin.status
@@ -198,8 +198,8 @@ def adminlist(bot: Bot, update: Update):
         if user.username:
             name = "[{}](tg://user?id={})".format(user.first_name + (user.last_name or ""), user.id)
         if status == "creator":
-            text += "\n 🔱 Creator:"
-            text += "\n` • `{} \n\n 🔰 Admin:".format(name)
+            text += "\n 🔱 kurucu:"
+            text += "\n` • `{} \n\n 🔰 yetkili:".format(name)
     for admin in administrators:
         user = admin.user
         status = admin.status
@@ -212,22 +212,22 @@ def adminlist(bot: Bot, update: Update):
 
 
 def __chat_settings__(chat_id, user_id):
-    return "You are *admin*: `{}`".format(
+    return "you are *admin*: `{}`".format(
         dispatcher.bot.get_chat_member(chat_id, user_id).status in ("administrator", "creator"))
 
 
 __help__ = """
- - /adminlist: list of admins in the chat
+ - /adminlist: yetkili kişilerin listesi
 
-*Admin only:*
- - /pin: silently pins the message replied to - add 'loud' or 'notify' to give notifs to users.
- - /unpin: unpins the currently pinned message
- - /invitelink: gets invitelink
- - /promote: promotes the user replied to
- - /demote: demotes the user replied to
+*sadece yöneteci:*
+ - /pin: mesajı sabitler
+ - /unpin: sabitlenen mesajı kaldırır
+ - /invitelink: davet linkini verir
+ - /promote: yetki verir yanıtlayarak
+ - /demote: yetki düşürür
 """
 
-__mod_name__ = "Admin"
+__mod_name__ = "yönetici"
 
 PIN_HANDLER = CommandHandler("pin", pin, pass_args=True, filters=Filters.group)
 UNPIN_HANDLER = CommandHandler("unpin", unpin, filters=Filters.group)
