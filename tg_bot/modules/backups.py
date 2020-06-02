@@ -22,8 +22,8 @@ def import_data(bot: Bot, update):
         try:
             file_info = bot.get_file(msg.reply_to_message.document.file_id)
         except BadRequest:
-            msg.reply_text("Try downloading and reuploading the file as yourself before importing - this one seems "
-                           "to be iffy!")
+            msg.reply_text("İçe aktarmadan önce dosyayı kendiniz indirip yeniden yüklemeyi deneyin - bu dosya "
+                           "iffy olmak!")
             return
 
         with BytesIO() as file:
@@ -33,8 +33,8 @@ def import_data(bot: Bot, update):
 
         # only import one group
         if len(data) > 1 and str(chat.id) not in data:
-            msg.reply_text("Theres more than one group here in this file, and none have the same chat id as this group "
-                           "- how do I choose what to import?")
+            msg.reply_text("Bu dosyada birden fazla grup var ve hiçbiri bu grupla aynı sohbet kimliğine sahip değil"
+                           "- neyi içe aktaracağımı nasıl seçerim?")
             return
 
         # Select data source
@@ -47,16 +47,16 @@ def import_data(bot: Bot, update):
             for mod in DATA_IMPORT:
                 mod.__import_data__(str(chat.id), data)
         except Exception:
-            msg.reply_text("An exception occured while restoring your data. The process may not be complete. If "
-                           "you're having issues with this, message @MarieSupport with your backup file so the "
-                           "issue can be debugged. My owners would be happy to help, and every bug "
-                           "reported makes me better! Thanks! :)")
+            msg.reply_text("Verileriniz geri yüklenirken bir istisna oluştu. İşlem tamamlanmamış olabilir."
+                           "bununla ilgili sorun yaşıyorsunuz,  yedekleme dosyanızla ilgili ileti"
+                           "sorun hata ayıklanabilir. Sahiplerim yardımcı olmaktan memnuniyet duyar ve her hata"
+                           "bildirildi beni daha iyi yapıyor! Teşekkürler! :)")
             LOGGER.exception("Import for chatid %s with name %s failed.", str(chat.id), str(chat.title))
             return
 
         # TODO: some of that link logic
         # NOTE: consider default permissions stuff?
-        msg.reply_text("Backup fully imported. Welcome back! :D")
+        msg.reply_text("Yedekleme tamamen içe aktarıldı. Tekrar hoş geldiniz! :D")
 
 
 @run_async
@@ -69,10 +69,10 @@ def export_data(bot: Bot, update: Update):
 __mod_name__ = "Backups"
 
 __help__ = """
-*Admin only:*
- - /import: reply to a group butler backup file to import as much as possible, making the transfer super simple! Note \
-that files/photos can't be imported due to telegram restrictions.
- - /export: !!! This isn't a command yet, but should be coming soon!
+*sadeca admin:*
+ - /import: aktarma süper basit hale getirmek için mümkün olduğunca almak için bir grup uşak yedekleme dosyasına yanıt! Not \
+telgraf kısıtlamaları nedeniyle dosya / fotoğraf içe aktarılamıyor.
+ - /export: !!!Bu henüz bir komut değil, ama yakında gelecek!
 """
 IMPORT_HANDLER = CommandHandler("import", import_data)
 EXPORT_HANDLER = CommandHandler("export", export_data)
