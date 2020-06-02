@@ -35,7 +35,7 @@ def check_flood(bot: Bot, update: Update) -> str:
 
     try:
         chat.kick_member(user.id)
-        msg.reply_text("dont disturb others you are No need for this group anymore...")
+        msg.reply_text("flood atma lan sie")
 
         return "<b>{}:</b>" \
                "\n#BANNED" \
@@ -44,11 +44,11 @@ def check_flood(bot: Bot, update: Update) -> str:
                                              mention_html(user.id, user.first_name))
 
     except BadRequest:
-        msg.reply_text("You cannot use this service as long as you do not give me Permissions.")
+        msg.reply_text("Bana izin vermediğiniz sürece bu hizmeti kullanamazsınız.")
         sql.set_flood(chat.id, 0)
         return "<b>{}:</b>" \
                "\n#INFO" \
-               "\nDon't have kick permissions, so automatically disabled antiflood.".format(chat.title)
+               "\nkullanıcı atmak için izim yok antiflood deve dışı.".format(chat.title)
 
 
 @run_async
@@ -64,25 +64,25 @@ def set_flood(bot: Bot, update: Update, args: List[str]) -> str:
         val = args[0].lower()
         if val == "off" or val == "no" or val == "0":
             sql.set_flood(chat.id, 0)
-            message.reply_text("I will no longer dismiss those who flood.")
+            message.reply_text("flood atanlar atılmicak.")
 
         elif val.isdigit():
             amount = int(val)
             if amount <= 0:
                 sql.set_flood(chat.id, 0)
-                message.reply_text("I will no longer dismiss those who flood.")
+                message.reply_text("flood atanlar atılmicak.")
                 return "<b>{}:</b>" \
                        "\n#SETFLOOD" \
                        "\n<b>Admin:</b> {}" \
                        "\nDisabled antiflood.".format(html.escape(chat.title), mention_html(user.id, user.first_name))
 
             elif amount < 3:
-                message.reply_text("Antiflood has to be either 0 (disabled), or a number bigger than 3!")
+                message.reply_text("Antiflood  0  (disabled), veya   3 den daha büyük sayı olmalı !")
                 return ""
 
             else:
                 sql.set_flood(chat.id, amount)
-                message.reply_text("Message control {} has been added to count ".format(amount))
+                message.reply_text("Mesaj kontrolü {} sayıma eklendi ".format(amount))
                 return "<b>{}:</b>" \
                        "\n#SETFLOOD" \
                        "\n<b>Admin:</b> {}" \
@@ -90,7 +90,7 @@ def set_flood(bot: Bot, update: Update, args: List[str]) -> str:
                                                                     mention_html(user.id, user.first_name), amount)
 
         else:
-            message.reply_text("I don't understand what you're saying .... Either use the number or use Yes-No")
+            message.reply_text("yes yada no yapıcaksın")
 
     return ""
 
@@ -101,10 +101,10 @@ def flood(bot: Bot, update: Update):
 
     limit = sql.get_flood_limit(chat.id)
     if limit == 0:
-        update.effective_message.reply_text("I am not doing message control right now!")
+        update.effective_message.reply_text("Şu anda mesaj kontrolü yapmıyorum!")
     else:
         update.effective_message.reply_text(
-            " {} I'll leave the bun to the person who sends the message more at the same time.".format(limit))
+            " {} Çörekleri mesajı aynı anda daha fazla gönderen kişiye bırakacağım.".format(limit))
 
 
 def __migrate__(old_chat_id, new_chat_id):
@@ -114,19 +114,19 @@ def __migrate__(old_chat_id, new_chat_id):
 def __chat_settings__(chat_id, user_id):
     limit = sql.get_flood_limit(chat_id)
     if limit == 0:
-        return "*Not* currently enforcing flood control."
+        return "*Not* şu anda sel kontrolünü zorunlu kılıyor."
     else:
-        return " The message control is set to `{}`.".format(limit)
+        return " antiflood ayarlandı`{}`.".format(limit)
 
 
 __help__ = """
- - /flood: To know your current message control..
+ - /flood: Mevcut mesaj kontrolünüzü görmek için
 
-*Admin only:*
- - /setflood <int/'no'/'off'>: enables or disables flood control
+*sadece admin:*
+ - /setflood <sayı/'no'/'off'>:ayarla
 """
 
-__mod_name__ = "AntiFlood"
+__mod_name__ = "flood"
 
 FLOOD_BAN_HANDLER = MessageHandler(Filters.all & ~Filters.status_update & Filters.group, check_flood)
 SET_FLOOD_HANDLER = CommandHandler("setflood", set_flood, pass_args=True, filters=Filters.group)
