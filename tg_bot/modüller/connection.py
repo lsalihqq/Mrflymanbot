@@ -27,16 +27,16 @@ def allow_connections(bot: Bot, update: Update, args: List[str]) -> str:
             print(var)
             if (var == "no"):
                 sql.set_allow_connect_to_chat(chat.id, False)
-                update.effective_message.reply_text("Disabled connections to this chat for users")
+                update.effective_message.reply_text("Kullanıcılar için bu sohbete devre dışı bırakılan bağlantılar")
             elif(var == "yes"):
                 sql.set_allow_connect_to_chat(chat.id, True)
-                update.effective_message.reply_text("Enabled connections to this chat for users")
+                update.effective_message.reply_text("Kullanıcılar için bu sohbete etkin bağlantılar")
             else:
-                update.effective_message.reply_text("Please enter on/yes/off/no in group!")
+                update.effective_message.reply_text("Lütfen gruba giriş on/yes/off/no!")
         else:
-            update.effective_message.reply_text("Please enter on/yes/off/no in group!")
+            update.effective_message.reply_text("Lütfen gruba on/yes/off/no!")
     else:
-        update.effective_message.reply_text("Please enter on/yes/off/no in group!")
+        update.effective_message.reply_text("Lütfen gruba on/yes/off/no!")
 
 
 @run_async
@@ -48,7 +48,7 @@ def connect_chat(bot, update, args):
             try:
                 connect_chat = int(args[0])
             except ValueError:
-                update.effective_message.reply_text("Invalid Chat ID provided!")
+                update.effective_message.reply_text("Geçersiz Sohbet Kimliği sağlandı!")
             if (bot.get_chat_member(connect_chat, update.effective_message.from_user.id).status in ('administrator', 'creator') or 
                                      (sql.allow_connect_to_chat(connect_chat) == True) and 
                                      bot.get_chat_member(connect_chat, update.effective_message.from_user.id).status in ('member')) or (
@@ -57,7 +57,7 @@ def connect_chat(bot, update, args):
                 connection_status = sql.connect(update.effective_message.from_user.id, connect_chat)
                 if connection_status:
                     chat_name = dispatcher.bot.getChat(connected(bot, update, chat, user.id, need_admin=False)).title
-                    update.effective_message.reply_text("Successfully connected to *{}*".format(chat_name), parse_mode=ParseMode.MARKDOWN)
+                    update.effective_message.reply_text("Başarıyla bağlandı *{}*".format(chat_name), parse_mode=ParseMode.MARKDOWN)
 
                     #Add chat to connection history
                     history = sql.get_history(user.id)
@@ -95,11 +95,11 @@ def connect_chat(bot, update, args):
                     keyboard(bot, update)
                     
                 else:
-                    update.effective_message.reply_text("Connection failed!")
-            else:
-                update.effective_message.reply_text("Connections to this chat not allowed!")
+                    update.effective_message.reply_text("Bağlantı başarısız oldu!")
+            else:bağlandığı 
+                update.effective_message.reply_text("Bu sohbete bağlantılara izin verilmiyor!")
         else:
-            update.effective_message.reply_text("Input chat ID to connect!")
+            update.effective_message.reply_text("!")
             history = sql.get_history(user.id)
             print(history.user_id, history.chat_id1, history.chat_id2, history.chat_id3, history.updated)
 
