@@ -99,25 +99,25 @@ def connect_chat(bot, update, args):
             else:bağlandığı 
                 update.effective_message.reply_text("Bu sohbete bağlantılara izin verilmiyor!")
         else:
-            update.effective_message.reply_text("!")
+            update.effective_message.reply_text("Bağlanmak için sohbet kimliğini girin!")
             history = sql.get_history(user.id)
             print(history.user_id, history.chat_id1, history.chat_id2, history.chat_id3, history.updated)
 
     else:
-        update.effective_message.reply_text("Usage limited to PMs only!")
+        update.effective_message.reply_text("Kullanım yalnızca PM'lerle sınırlıdır!")
 
 
 def disconnect_chat(bot, update):
     if update.effective_chat.type == 'private':
         disconnection_status = sql.disconnect(update.effective_message.from_user.id)
         if disconnection_status:
-            sql.disconnected_chat = update.effective_message.reply_text("Disconnected from chat!")
+            sql.disconnected_chat = update.effective_message.reply_text("Sohbet bağlantısı kesildi!")
             #Rebuild user's keyboard
             keyboard(bot, update)
         else:
-           update.effective_message.reply_text("Disconnection unsuccessfull!")
+           update.effective_message.reply_text("Bağlantı kesilmesi başarısız!")
     else:
-        update.effective_message.reply_text("Usage restricted to PMs only")
+        update.effective_message.reply_text("Kullanım yalnızca PM'lerle sınırlıdır")
 
 
 def connected(bot, update, chat, user_id, need_admin=True):
@@ -131,12 +131,12 @@ def connected(bot, update, chat, user_id, need_admin=True):
                 if bot.get_chat_member(conn_id, update.effective_message.from_user.id).status in ('administrator', 'creator') or user_id in SUDO_USERS:
                     return conn_id
                 else:
-                    update.effective_message.reply_text("You need to be a admin in a connected group!")
+                    update.effective_message.reply_text("Bağlı bir grupta yönetici olmanız gerekir!")
                     exit(1)
             else:
                 return conn_id
         else:
-            update.effective_message.reply_text("Group changed rights connection or you are not admin anymore.\nI'll disconnect you.")
+            update.effective_message.reply_text("Grup değiştirilen hak bağlantısı veya artık yönetici değilsiniz. \ NSizin bağlantısını keseceğim.")
             disconnect_chat(bot, update)
             exit(1)
     else:
@@ -145,17 +145,17 @@ def connected(bot, update, chat, user_id, need_admin=True):
 
 
 __help__ = """
-Actions are available with connected groups:
- • View and edit notes
- • View and edit filters
- • More in future!
-
- - /connect <chatid>: Connect to remote chat
- - /disconnect: Disconnect from chat
- - /allowconnect on/yes/off/no: Allow connect users to group
+İşlemler bağlı gruplarla kullanılabilir:
+ • Notları görüntüleme ve düzenleme
+ • Filtreleri görüntüleme ve düzenleme
+ • Gelecekte daha fazlası!
+ 
+ - /connect <grub id>: Uzaktan sohbete bağlan
+ - /disconnect: Sohbet bağlantısını kes
+ - /allowconnect on/yes/off/no: Bağlanan kullanıcıların gruplamasına izin ver
 """
 
-__mod_name__ = "Connections"
+__mod_name__ = "bağlanma"
 
 CONNECT_CHAT_HANDLER = CommandHandler("connect", connect_chat, allow_edited=True, pass_args=True)
 DISCONNECT_CHAT_HANDLER = CommandHandler("disconnect", disconnect_chat, allow_edited=True)
