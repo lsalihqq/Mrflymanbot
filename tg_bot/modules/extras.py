@@ -8,21 +8,17 @@ from tg_bot import dispatcher
 from tg_bot.modules.disable import DisableAbleCommandHandler
 
 ABUSE_STRINGS = (
-    "Fuck off",
-    "Stfu go fuck yourself",
-    "Ur mum gey",
-    "Ur dad lesbo",
-    "Bsdk",
-    "Nigga",
-    "Ur granny tranny",
-    "you noob",
-	"Relax your Rear,ders nothing to fear,The Rape train is finally here",
-	"Stfu bc",
-	"Stfu and Gtfo U nub",
-	"GTFO bsdk"
-    "CUnt",
-    " Gay is here",
-    "Ur dad gey bc "
+    "Siktir git",
+    " git kendini becer",
+    "senin annen gey",
+    "senin baban lezbo",
+    "salak",
+    "Zenci",
+    "senin büyükannen trans",
+    "seni Çömez",
+"Arkanızı rahatlatın, korkacak bir şey yok, Tecavüz treni sonunda burada",
+    "Am",
+    "Eşcinsel burada",
 )
 
 EYES = [
@@ -198,8 +194,8 @@ EARS = [
 ]
 
 TOSS = (
-    "Heads",
-    "Tails",
+   "yazı",
+   "tura",
 )
 
 @run_async
@@ -225,7 +221,7 @@ def shrug(bot: Bot, update: Update):
 def bluetext(bot: Bot, update: Update):
     # reply to correct message
     reply_text = update.effective_message.reply_to_message.reply_text if update.effective_message.reply_to_message else update.effective_message.reply_text
-    reply_text("BLUE TEXT\n MUST CLICK\n I AM A STUPID ANIMAL THAT IS ATTRACTED TO COLORS")		
+    reply_text("MAVİ METİN \ n TIKLAYIN \ n RENKLERE TAKILAN KABA BİR HAYVANIM")		
 
 @run_async
 def rlg(bot: Bot, update: Update):
@@ -239,36 +235,35 @@ def rlg(bot: Bot, update: Update):
 def decide(bot: Bot, update: Update):
         r = randint(1, 100)
         if r <= 65:
-            update.message.reply_text("Yes.")
+            update.message.reply_text("eveet.")
         elif r <= 90:
-            update.message.reply_text("NoU.")
+            update.message.reply_text("hayır.")
         else:
-            update.message.reply_text("Maybe.")
+            update.message.reply_text("belki.")
             
 def table(bot: Bot, update: Update):
             r = randint(1, 100)
             if r <= 45:
                 update.message.reply_text("(╯°□°）╯彡 ┻━┻")
             elif r <= 90:
-                update.message.reply_text("Send money bsdk to buy new table to flip")
+                update.message.reply_text("Çevirmek için yeni masa satın almak için para  gönderin")
             else:
-                update.message.reply_text("Go do some work instead of flippin tables you helpless fagit.")
+                update.message.reply_text("Sen çaresiz ibne masa çevirmek yerine biraz iş yap.")
 		
 __help__ = """
- - /shrug : get shrug XD.
- - /table : get flip/unflip :v.
- - /decide : Randomly answers yes/no/maybe
- - /toss : Tosses A coin
- - /abuse : Abuses the cunt
- - /tts <any text> : Converts text to speech
+ - /shrug :omuz silkme XD olsun.
+ - /table : ve flip/unflipg :v.
+ - /decide :rastgele cevab evet/hayır/belki
+ - /toss : Bozuk Para
+ - /abuse : küfür
+ - /tts <yazı> : botu konuştur ama ingilizce
  - /bluetext : check urself :V
- - /roll : Roll a dice.
- - /rlg : Join ears,nose,mouth and create an emo ;-;
- - /zal <any text> : zalgofy! your text
- Lyrics Plugin will take some moar time to come up.
+ - /roll : zar at
+ - /rlg : emoji yapar
+ - /zal <yazı> : fiyakalı yazı
 """
 
-__mod_name__ = "Extras"
+__mod_name__ = "eğlence"
 
 ROLL_HANDLER = DisableAbleCommandHandler("roll", roll)
 TOSS_HANDLER = DisableAbleCommandHandler("toss", toss)
