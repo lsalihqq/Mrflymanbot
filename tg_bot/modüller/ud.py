@@ -16,10 +16,10 @@ def ud(bot: Bot, update: Update):
   message.reply_text(reply_text)
 
 __help__ = """
- - /ud:{word} Type the word or expression you want to search use. like /ud telegram Word: Telegram Definition: A once-popular system of telecommunications, in which the sender would contact the telegram service and speak their [message] over the [phone]. The person taking the message would then send it, via a teletype machine, to a telegram office near the receiver's [address]. The message would then be hand-delivered to the addressee. From 1851 until it discontinued the service in 2006, Western Union was the best-known telegram service in the world.
-"""
+ - /ud:{kelime} Aramak istediğiniz sözcüğü veya ifadeyi yazın. /ud telegram Word: Telegram Definition: Bir zamanlar popüler olan telekomünikasyon sistemi, gönderenin telgraf servisiyle iletişimkuracağı ve [telefon] üzerinden [mesajlarını] konuşacağı bir sistemdir. İletiyi alan kişi daha sonra teletip makinesi aracılığıyla alıcının [adresi] yakınındaki bir telgraf ofisine gönderir. İleti daha sonra adrese elden teslim edilir. 1851'den 2006'da hizmeti kesilene kadar, Western Union"
+""
 
-__mod_name__ = "Urban dictionary"
+__mod_name__ = "ud"
   
 ud_handle = DisableAbleCommandHandler("ud", ud)
 
