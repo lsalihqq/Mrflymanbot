@@ -25,19 +25,19 @@ def gmute(bot: Bot, update: Update, args: List[str]):
     user_id, reason = extract_user_and_text(message, args)
 
     if not user_id:
-        message.reply_text("You don't seem to be referring to a user.")
+        message.reply_text("Bir kullanıcıdan bahsediyor gibi görünmüyorsun..")
         return
 
     if int(user_id) in SUDO_USERS:
-        message.reply_text("I spy, with my little eye... a sudo user war! Why are you guys turning on each other?")
+        message.reply_text("Ben casus, benim küçük göz ile ... bir sudo kullanıcı savaş! Neden birbiriniz üzerinde dönüyorsunuz??")
         return
 
     if int(user_id) in SUPPORT_USERS:
-        message.reply_text("OOOH someone's trying to gmute a support user! *grabs popcorn*")
+        message.reply_text("OOOH birisi bir destek kullanıcı gmute çalışıyor! *patlamış mısır kapıyor*")
         return
 
     if user_id == bot.id:
-        message.reply_text("-_- So funny, lets gmute myself why don't I? Nice try.")
+        message.reply_text("-_- Çok komik, neden ben değil mi? Nice deneyin.")
         return
 
     try:
