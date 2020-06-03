@@ -30,7 +30,7 @@ HELP_STRINGS = """
 
 Merhaba benim adım *{}*.
 
-*Main* bazı komutlar:
+*menü için* bazı komutlar:
  - /start: botu başlat
  - /help: komutlar....
  - /settings:
