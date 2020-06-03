@@ -106,7 +106,7 @@ def lock(bot: Bot, update: Update, args: List[str]) -> str:
         if len(args) >= 1:
             if args[0] in LOCK_TYPES:
                 sql.update_lock(chat.id, args[0], locked=True)
-                message.reply_text("Locked {} messages for all non-admins!".format(args[0]))
+                message.reply_text("Yönetici olmayan tüm iletiler için kilitli {} iletileri!".format(args[0]))
 
                 return "<b>{}:</b>" \
                        "\n#LOCK" \
@@ -120,7 +120,7 @@ def lock(bot: Bot, update: Update, args: List[str]) -> str:
                     members = users_sql.get_chat_members(str(chat.id))
                     restr_members(bot, chat.id, members, messages=True, media=True, other=True)
 
-                message.reply_text("Locked {} for all non-admins!".format(args[0]))
+                message.reply_text("Tüm yönetici olmayanlar için kilitli {}!".format(args[0]))
                 return "<b>{}:</b>" \
                        "\n#LOCK" \
                        "\n<b>Admin:</b> {}" \
@@ -128,12 +128,12 @@ def lock(bot: Bot, update: Update, args: List[str]) -> str:
                                                           mention_html(user.id, user.first_name), args[0])
 
             else:
-                message.reply_text("What are you trying to lock...? Try /locktypes for the list of lockables")
+                message.reply_text("Neyi kilitlemeye çalışıyorsun?..? Try /locktypes for the list of lockables")
 
     else:
-        message.reply_text("I'm not an administrator, or haven't got delete rights.")
+        message.reply_text("Yönetici değilim veya silme haklarım yok.")
 
-    return ""
+return ""
 
 
 @run_async
