@@ -75,13 +75,13 @@ if is_module_loaded(FILENAME):
 
             if disable_cmd in set(DISABLE_CMDS + DISABLE_OTHER):
                 sql.disable_command(chat.id, disable_cmd)
-                update.effective_message.reply_text("Disabled the use of `{}`".format(disable_cmd),
+                update.effective_message.reply_text("Kullanımını devre dışı bıraktı `{}`".format(disable_cmd),
                                                     parse_mode=ParseMode.MARKDOWN)
             else:
-                update.effective_message.reply_text("That command can't be disabled")
+                update.effective_message.reply_text("Bu komut devre dışı bırakılamaz")
 
         else:
-            update.effective_message.reply_text("What should I disable?")
+            update.effective_message.reply_text("Neyi devre dışı bırakmalıyım??")
 
 
     @run_async
@@ -94,13 +94,13 @@ if is_module_loaded(FILENAME):
                 enable_cmd = enable_cmd[1:]
 
             if sql.enable_command(chat.id, enable_cmd):
-                update.effective_message.reply_text("Enabled the use of `{}`".format(enable_cmd),
+                update.effective_message.reply_text("Kullanımını etkinleştirdi `{}`".format(enable_cmd),
                                                     parse_mode=ParseMode.MARKDOWN)
             else:
-                update.effective_message.reply_text("Is that even disabled?")
+                update.effective_message.reply_text("Bu bile devre dışı mı??")
 
         else:
-            update.effective_message.reply_text("What should I enable?")
+            update.effective_message.reply_text("Neyi etkinleştirmeliyim?")
 
 
     @run_async
@@ -110,10 +110,10 @@ if is_module_loaded(FILENAME):
             result = ""
             for cmd in set(DISABLE_CMDS + DISABLE_OTHER):
                 result += " - `{}`\n".format(escape_markdown(cmd))
-            update.effective_message.reply_text("The following commands are toggleable:\n{}".format(result),
+            update.effective_message.reply_text("Aşağıdaki komutlar değiştirilebilir:\n{}".format(result),
                                                 parse_mode=ParseMode.MARKDOWN)
         else:
-            update.effective_message.reply_text("No commands can be disabled.")
+            update.effective_message.reply_text("Hiçbir komut devre dışı bırakılamaz.")
 
 
     # do not async
@@ -125,7 +125,7 @@ if is_module_loaded(FILENAME):
         result = ""
         for cmd in disabled:
             result += " - `{}`\n".format(escape_markdown(cmd))
-        return "The following commands are currently restricted:\n{}".format(result)
+        return "Şu anda aşağıdaki komutlar kısıtlanmıştır:\n{}".format(result)
 
 
     @run_async
@@ -135,7 +135,7 @@ if is_module_loaded(FILENAME):
 
 
     def __stats__():
-        return "{} disabled items, across {} chats.".format(sql.num_disabled(), sql.num_chats())
+        return "{}devre dışı bırakılmış öğeler {} sohbet.".format(sql.num_disabled(), sql.num_chats())
 
 
     def __migrate__(old_chat_id, new_chat_id):
@@ -146,15 +146,15 @@ if is_module_loaded(FILENAME):
         return build_curr_disabled(chat_id)
 
 
-    __mod_name__ = "Command disabling"
+    __mod_name__ = "Komut devre dışı bırakma"
 
     __help__ = """
- - /cmds: check the current status of disabled commands
+ - /cmds:devre dışı bırakılmış komutların mevcut durumunu kontrol et
 
 *Admin only:*
- - /enable <cmd name>: enable that command
- - /disable <cmd name>: disable that command
- - /listcmds: list all possible toggleable commands
+ - /enable <cmd ismi>: bu komutu etkinleştir
+ - /disable <cmd ismi>: bu komutu devre dışı bırak
+ - /listcmds: değiştirilebilen tüm komutları listele
     """
 
     DISABLE_HANDLER = CommandHandler("disable", disable, pass_args=True, filters=Filters.group)
