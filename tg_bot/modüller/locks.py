@@ -133,7 +133,7 @@ def lock(bot: Bot, update: Update, args: List[str]) -> str:
     else:
         message.reply_text("Yönetici değilim veya silme haklarım yok.")
 
-return ""
+    return ""
 
 
 @run_async
