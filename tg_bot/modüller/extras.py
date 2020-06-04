@@ -256,7 +256,6 @@ __help__ = """
  - /decide :rastgele cevab evet/hayır/belki
  - /toss : Bozuk Para
  - /abuse : küfür
- - /tts <yazı> : botu konuştur ama ingilizce
  - /bluetext : check urself :V
  - /roll : zar at
  - /rlg : emoji yapar
