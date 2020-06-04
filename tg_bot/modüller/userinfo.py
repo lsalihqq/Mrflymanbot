@@ -29,9 +29,9 @@ def about_me(bot: Bot, update: Update, args: List[str]):
                                             parse_mode=ParseMode.MARKDOWN)
     elif message.reply_to_message:
         username = message.reply_to_message.from_user.first_name
-        update.effective_message.reply_text(username + "Information about him is currently unavailable !")
+        update.effective_message.reply_text(username + "Onun hakkında bilgi şu anda kullanılamıyor !")
     else:
-        update.effective_message.reply_text("You have not added any information about yourself yet !")
+        update.effective_message.reply_text("Henüz kendiniz hakkında herhangi bir bilgi eklemedin !")
 
 
 @run_async
@@ -43,10 +43,10 @@ def set_about_me(bot: Bot, update: Update):
     if len(info) == 2:
         if len(info[1]) < MAX_MESSAGE_LENGTH // 4:
             sql.set_user_me_info(user_id, info[1])
-            message.reply_text("Your information has been recorded successfully")
+            message.reply_text("Bilgileriniz başarıyla kaydedildi")
         else:
             message.reply_text(
-                " About You{} To be confined to letters ".format(MAX_MESSAGE_LENGTH // 4, len(info[1])))
+                " Hakkında{} Harflerle sınırlı kalmak ".format(MAX_MESSAGE_LENGTH // 4, len(info[1])))
 
 
 @run_async
@@ -66,9 +66,9 @@ def about_bio(bot: Bot, update: Update, args: List[str]):
                                             parse_mode=ParseMode.MARKDOWN)
     elif message.reply_to_message:
         username = user.first_name
-        update.effective_message.reply_text("{} No details about him have been added yet !".format(username))
+        update.effective_message.reply_text("{} Onunla ilgili henüz bir detay eklenmedi. !".format(username))
     else:
-        update.effective_message.reply_text(" Your information about you has been added !")
+        update.effective_message.reply_text(" Sizinle ilgili bilgileriniz eklendi !")
 
 
 @run_async
@@ -79,10 +79,10 @@ def set_about_bio(bot: Bot, update: Update):
         repl_message = message.reply_to_message
         user_id = repl_message.from_user.id
         if user_id == message.from_user.id:
-            message.reply_text("Are you looking to change your own ... ?? That 's it.")
+            message.reply_text("Kendi değiştirmek için mi arıyorsunuz ... ?? That 's it.")
             return
         elif user_id == bot.id and sender.id not in SUDO_USERS:
-            message.reply_text(" Only SUDO USERS can change my information.")
+            message.reply_text(" Bilgilerimi yalnızca SUDO KULLANICILARI DEĞIŞTIREBILIR.")
             return
 
         text = message.text
@@ -90,13 +90,13 @@ def set_about_bio(bot: Bot, update: Update):
         if len(bio) == 2:
             if len(bio[1]) < MAX_MESSAGE_LENGTH // 4:
                 sql.set_user_bio(user_id, bio[1])
-                message.reply_text("{} Information about the him has been successfully collected !".format(repl_message.from_user.first_name))
+                message.reply_text("{} Onun hakkında bilgi başarıyla toplandı !".format(repl_message.from_user.first_name))
             else:
                 message.reply_text(
-                    "About you {} Must stick to the letter! The number of characters you have just tried {} hm .".format(
+                    "Senin hakkında {} Mektuba bağlı kalmalı! Az önce denediğiniz karakter sayısı {} hm .".format(
                         MAX_MESSAGE_LENGTH // 4, len(bio[1])))
     else:
-        message.reply_text(" His information can only be added if someone's MESSAGE as a REPLY")
+        message.reply_text(" Onun bilgileri sadece bir kişinin MESAJ ie yanıt olarak eklenebilir")
 
 
 def __user_info__(user_id):
@@ -113,13 +113,13 @@ def __user_info__(user_id):
 
 
 __help__ = """
- - /setbio <text>: while replying, will save another user's bio
- - /bio: will get your or another user's bio. This cannot be set by yourself.
- - /setme <text>: will set your info
- - /me: will get your or another user's info
+ - / setbio <yazı>: yanıtlarken, başka bir kullanıcının biyo kaydeder
+ - /bio: sizin veya başka bir kullanıcının bio alacak. Bu tek başına ayarlanamaz.
+ - /setme <yazı>: bilgilerinizi belirleyecek
+ - /me: sizin veya başka bir kullanıcının bilgilerini alacak
 """
 
-__mod_name__ = "Bios and Abouts"
+__mod_name__ = "bio ve bilgiler"
 
 SET_BIO_HANDLER = DisableAbleCommandHandler("setbio", set_about_bio)
 GET_BIO_HANDLER = DisableAbleCommandHandler("bio", about_bio, pass_args=True)
