@@ -76,7 +76,7 @@ def del_message(bot: Bot, update: Update) -> str:
                    "\nMessage deleted.".format(html.escape(chat.title),
                                                mention_html(user.id, user.first_name))
     else:
-        update.effective_message"ne silmek istersiniz?")
+        update.effective_message("ne silmek istersiniz?")
 
     return ""
 
