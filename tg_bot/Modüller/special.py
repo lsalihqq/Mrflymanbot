@@ -102,7 +102,30 @@ def leavechat(bot: Bot, update: Update, args: List[int]):
         update.effective_message.reply_text("Bir sohbeti kastediyor gibi görünmüyorsun.)
 
 __help__ = """
-**
+**Yalnızca yönetici: **
+- / getlink ** chatid **: Belirli bir sohbet için davet bağlantısını al.
+- / banall: Bir sohbetin tüm üyelerini yasakla
+- / leavechat ** chatid **: sohbetten ayrıl
+** Yalnızca Sudo / sahibi: **
+- / quickscope ** userid ** ** chatid **: Kullanıcıyı sohbetten yasakla.
+- / quickunban ** userid ** ** chatid **: Kullanıcının sohbetten çıkarılmasını yasakla.
+- / snipe ** chatid ** ** string **: Belirli bir sohbete mesaj göndermemi sağlayın.
+- / rban ** userid ** ** chatid ** bir kullanıcıyı sohbetten uzaktan yasaklama
+- / runban ** userid ** ** chatid ** bir kullanıcının sohbetini uzaktan yasaklaması
+- / İstatistikler: bot'un istatistiklerini kontrol et
+- / chatlist: sohbet listesi al
+- / gbanlist: gbanned kullanıcı listesini al
+- / gmutelist: gmuted kullanıcı listesini al
+- chat_id / / restrict chat_id komutları ile sohbet yasakları
+** Destek kullanıcısı: **
+- / Gban: Bir kullanıcıyı genel olarak yasakla
+- / Ungban: Bir kullanıcıyı unutma
+- / Gmute: Bir kullanıcıyı sakla
+- / Ungmute: Bir kullanıcının sesini açma
+Sudo / owner bu komutları da kullanabilir.
+**Kullanıcılar:**
+- / Listsudo Sudo kullanıcılarının bir listesini verir
+- / Listsupport destek kullanıcılarının bir listesini verir
 """
 __mod_name__ = "özel"
 
