@@ -96,7 +96,7 @@ def connect_chat(bot, update, args):
                     
                 else:
                     update.effective_message.reply_text("Bağlantı başarısız oldu!")
-            else:bağlandığı 
+            else:
                 update.effective_message.reply_text("Bu sohbete bağlantılara izin verilmiyor!")
         else:
             update.effective_message.reply_text("Bağlanmak için sohbet kimliğini girin!")
