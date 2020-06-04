@@ -86,14 +86,14 @@ def del_joined(bot: Bot, update: Update, args: List[str]) -> str:
     if not args:
         del_pref = sql.get_del_pref(chat.id)
         if del_pref:
-            update.effective_message.reply_text("I should be deleting `user` joined the chat messages now.")
+            update.effective_message.reply_text("Şimdi sohbet mesajlarına katılan `kullanıcı`yı silmeliyim.")
         else:
-            update.effective_message.reply_text("I'm currently not deleting old joined messages!")
+            update.effective_message.reply_text("Şu anda eski eski iletileri silmiyorum!")
         return ""
 
     if args[0].lower() in ("on", "yes"):
         sql.set_del_joined(str(chat.id), True)
-        update.effective_message.reply_text("I'll try to delete old joined messages!")
+        update.effective_message.reply_text("Katılan eski mesajları silmeye çalışacağım!")
         return "<b>{}:</b>" \
                "\n#CLEAN_SERVICE_MESSAGE" \
                "\n<b>Admin:</b> {}" \
@@ -101,7 +101,7 @@ def del_joined(bot: Bot, update: Update, args: List[str]) -> str:
                                                                          mention_html(user.id, user.first_name))
     elif args[0].lower() in ("off", "no"):
         sql.set_del_joined(str(chat.id), False)
-        update.effective_message.reply_text("I won't delete old joined messages.")
+        update.effective_message.reply_text("Katılan eski mesajları silmeyeceğim.")
         return "<b>{}:</b>" \
                "\n#CLEAN_SERVICE_MESSAGE" \
                "\n<b>Admin:</b> {}" \
@@ -109,7 +109,7 @@ def del_joined(bot: Bot, update: Update, args: List[str]) -> str:
                                                                           mention_html(user.id, user.first_name))
     else:
         # idek what you're writing, say yes or no
-        update.effective_message.reply_text("I understand 'on/yes' or 'off/no' only!")
+        update.effective_message.reply_text("Sadece 'on / yes' veya 'off / no' anlıyorum!")
         return ""
 
 
@@ -133,7 +133,7 @@ def new_member(bot: Bot, update: Update):
         for new_mem in new_members:
             # Give the owner a special welcome
             if new_mem.id == OWNER_ID:
-                update.effective_message.reply_text("Master is in the houseeee, let's get this party started!")
+                update.effective_message.reply_text("beyler sakin botun sahibi geldi!")
                 continue
 
             # Don't welcome yourself
@@ -201,7 +201,7 @@ def left_member(bot: Bot, update: Update):
 
             # Give the owner a special goodbye
             if left_mem.id == OWNER_ID:
-                update.effective_message.reply_text("RIP Master")
+                update.effective_message.reply_text("botun sahibi çıktı bu demek değilki gözü üzerimizde deil")
                 return
 
             # if media goodbye, use appropriate function for it
@@ -249,7 +249,7 @@ def welcome(bot: Bot, update: Update, args: List[str]):
         noformat = args and args[0].lower() == "noformat"
         pref, welcome_m, welcome_type = sql.get_welc_pref(chat.id)
         update.effective_message.reply_text(
-            "This chat has it's welcome setting set to: `{}`.\n*The welcome message "
+            "Bu sohbette hoş geldiniz ayarı şu şekilde ayarlandı:` {} `. \ N * Hoş geldiniz mesajı "
             "(not filling the {{}}) is:*".format(pref),
             parse_mode=ParseMode.MARKDOWN)
 
@@ -275,15 +275,15 @@ def welcome(bot: Bot, update: Update, args: List[str]):
     elif len(args) >= 1:
         if args[0].lower() in ("on", "yes"):
             sql.set_welc_preference(str(chat.id), True)
-            update.effective_message.reply_text("I'll be polite!")
+            update.effective_message.reply_text("Kibar olacağım!")
 
         elif args[0].lower() in ("off", "no"):
             sql.set_welc_preference(str(chat.id), False)
-            update.effective_message.reply_text("I'm sulking, not saying hello anymore.")
+            update.effective_message.reply_text("Somurtuyorum, artık merhaba demiyorum.")
 
         else:
             # idek what you're writing, say yes or no
-            update.effective_message.reply_text("I understand 'on/yes' or 'off/no' only!")
+            update.effective_message.reply_text("ben sadece 'on/yes' yada 'off/no' anlıyorum!")
 
 
 @run_async
@@ -295,7 +295,7 @@ def goodbye(bot: Bot, update: Update, args: List[str]):
         noformat = args and args[0] == "noformat"
         pref, goodbye_m, goodbye_type = sql.get_gdbye_pref(chat.id)
         update.effective_message.reply_text(
-            "This chat has it's goodbye setting set to: `{}`.\n*The goodbye  message "
+            "Bu sohbette elveda ayarı şu şekilde ayarlandı:` {} `. \ N * Elveda mesajı"
             "(not filling the {{}}) is:*".format(pref),
             parse_mode=ParseMode.MARKDOWN)
 
@@ -321,15 +321,15 @@ def goodbye(bot: Bot, update: Update, args: List[str]):
     elif len(args) >= 1:
         if args[0].lower() in ("on", "yes"):
             sql.set_gdbye_preference(str(chat.id), True)
-            update.effective_message.reply_text("I'll be sorry when people leave!")
+            update.effective_message.reply_text("İnsanlar gittiğinde özür dilerim!")
 
         elif args[0].lower() in ("off", "no"):
             sql.set_gdbye_preference(str(chat.id), False)
-            update.effective_message.reply_text("They leave, they're dead to me.")
+            update.effective_message.reply_text("Ayrıldılar, benim için öldüler.")
 
         else:
             # idek what you're writing, say yes or no
-            update.effective_message.reply_text("I understand 'on/yes' or 'off/no' only!")
+            update.effective_message.reply_text("ben sadece 'on/yes' yada 'off/no' anlıyorum!")
 
 
 @run_async
@@ -343,11 +343,11 @@ def set_welcome(bot: Bot, update: Update) -> str:
     text, data_type, content, buttons = get_welcome_type(msg)
 
     if data_type is None:
-        msg.reply_text("You didn't specify what to reply with!")
+        msg.reply_text("Ne ile cevap vereceğinizi belirtmediniz!")
         return ""
 
     sql.set_custom_welcome(chat.id, content or text, data_type, buttons)
-    msg.reply_text("Successfully set custom welcome message!")
+    msg.reply_text("Özel karşılama iletisini başarıyla ayarlayın!")
 
     return "<b>{}:</b>" \
            "\n#SET_WELCOME" \
@@ -363,7 +363,7 @@ def reset_welcome(bot: Bot, update: Update) -> str:
     chat = update.effective_chat  # type: Optional[Chat]
     user = update.effective_user  # type: Optional[User]
     sql.set_custom_welcome(chat.id, sql.DEFAULT_WELCOME, sql.Types.TEXT)
-    update.effective_message.reply_text("Successfully reset welcome message to default!")
+    update.effective_message.reply_text("Karşılama mesajını başarıyla varsayılana sıfırlayın!")
     return "<b>{}:</b>" \
            "\n#RESET_WELCOME" \
            "\n<b>Admin:</b> {}" \
@@ -381,11 +381,11 @@ def set_goodbye(bot: Bot, update: Update) -> str:
     text, data_type, content, buttons = get_welcome_type(msg)
 
     if data_type is None:
-        msg.reply_text("You didn't specify what to reply with!")
+        msg.reply_text("Ne ile cevap vereceğinizi belirtmediniz!")
         return ""
 
     sql.set_custom_gdbye(chat.id, content or text, data_type, buttons)
-    msg.reply_text("Successfully set custom goodbye message!")
+    msg.reply_text("Özel veda mesajı başarıyla ayarlandı!")
     return "<b>{}:</b>" \
            "\n#SET_GOODBYE" \
            "\n<b>Admin:</b> {}" \
@@ -400,7 +400,7 @@ def reset_goodbye(bot: Bot, update: Update) -> str:
     chat = update.effective_chat  # type: Optional[Chat]
     user = update.effective_user  # type: Optional[User]
     sql.set_custom_gdbye(chat.id, sql.DEFAULT_GOODBYE, sql.Types.TEXT)
-    update.effective_message.reply_text("Successfully reset goodbye message to default!")
+    update.effective_message.reply_text("Güle güle mesajını başarıyla varsayılana sıfırlayın!")
     return "<b>{}:</b>" \
            "\n#RESET_GOODBYE" \
            "\n<b>Admin:</b> {}" \
@@ -418,14 +418,14 @@ def clean_welcome(bot: Bot, update: Update, args: List[str]) -> str:
     if not args:
         clean_pref = sql.get_clean_pref(chat.id)
         if clean_pref:
-            update.effective_message.reply_text("I should be deleting welcome messages up to two days old.")
+            update.effective_message.reply_text("İki güne kadar hoş geldiniz mesajlarını silmeliyim.")
         else:
-            update.effective_message.reply_text("I'm currently not deleting old welcome messages!")
+            update.effective_message.reply_text("Şu anda eski karşılama iletilerini silmiyorum!")
         return ""
 
     if args[0].lower() in ("on", "yes"):
         sql.set_clean_welcome(str(chat.id), True)
-        update.effective_message.reply_text("I'll try to delete old welcome messages!")
+        update.effective_message.reply_text("Eski karşılama iletilerini silmeye çalışacağım!")
         return "<b>{}:</b>" \
                "\n#CLEAN_WELCOME" \
                "\n<b>Admin:</b> {}" \
@@ -433,7 +433,7 @@ def clean_welcome(bot: Bot, update: Update, args: List[str]) -> str:
                                                                          mention_html(user.id, user.first_name))
     elif args[0].lower() in ("off", "no"):
         sql.set_clean_welcome(str(chat.id), False)
-        update.effective_message.reply_text("I won't delete old welcome messages.")
+        update.effective_message.reply_text("Eski karşılama iletilerini silmeyeceğim.")
         return "<b>{}:</b>" \
                "\n#CLEAN_WELCOME" \
                "\n<b>Admin:</b> {}" \
@@ -441,33 +441,33 @@ def clean_welcome(bot: Bot, update: Update, args: List[str]) -> str:
                                                                           mention_html(user.id, user.first_name))
     else:
         # idek what you're writing, say yes or no
-        update.effective_message.reply_text("I understand 'on/yes' or 'off/no' only!")
+        update.effective_message.reply_text("ben sadece'on/yes' yada 'off/no' anlıyorum!")
         return ""
 
 
-WELC_HELP_TXT = "Your group's welcome/goodbye messages can be personalised in multiple ways. If you want the messages" \
-                " to be individually generated, like the default welcome message is, you can use *these* variables:\n" \
-                " - `{{first}}`: this represents the user's *first* name\n" \
-                " - `{{last}}`: this represents the user's *last* name. Defaults to *first name* if user has no " \
-                "last name.\n" \
-                " - `{{fullname}}`: this represents the user's *full* name. Defaults to *first name* if user has no " \
-                "last name.\n" \
-                " - `{{username}}`: this represents the user's *username*. Defaults to a *mention* of the user's " \
-                "first name if has no username.\n" \
-                " - `{{mention}}`: this simply *mentions* a user - tagging them with their first name.\n" \
-                " - `{{id}}`: this represents the user's *id*\n" \
-                " - `{{count}}`: this represents the user's *member number*.\n" \
-                " - `{{chatname}}`: this represents the *current chat name*.\n" \
-                "\nEach variable MUST be surrounded by `{{}}` to be replaced.\n" \
-                "Welcome messages also support markdown, so you can make any elements bold/italic/code/links. " \
-                "Buttons are also supported, so you can make your welcomes look awesome with some nice intro " \
-                "buttons.\n" \
-                "To create a button linking to your rules, use this: `[Rules](buttonurl://t.me/{}?start=group_id)`. " \
-                "Simply replace `group_id` with your group's id, which can be obtained via /id, and you're good to " \
-                "go. Note that group ids are usually preceded by a `-` sign; this is required, so please don't " \
-                "remove it.\n" \
-                "If you're feeling fun, you can even set images/gifs/videos/voice messages as the welcome message by " \
-                "replying to the desired media, and calling /setwelcome.".format(dispatcher.bot.username)
+WELC_HELP_TXT = "Grubunuzun hoş geldiniz / hoşçakal iletileri birden çok şekilde kişiselleştirilebilir. İletileri istiyorsanız" \
+                "ayrı ayrı oluşturulacak, varsayılan hoş geldiniz mesajı gibi * şu * değişkenleri kullanabilirsiniz: \ n" \
+                "-` {{first}} `: bu, kullanıcının * ilk * adını temsil eder \ n" \
+                "-` {{last}} `: bu, kullanıcının * soyadı * adını temsil eder. Varsayılan olarak * adının * varsayılan değeri" \
+                "soyadı. \ n" \
+                "-` {{tam ad}} `: bu, kullanıcının * tam * adını temsil eder. Varsayılan olarak * ad * varsayılanıdır" \
+                "soyadı. \ n" \
+                "-` {{kullanıcıadı}} `: bu, kullanıcının * kullanıcı adını * temsil eder. Varsayılan olarak kullanıcının * sözünü * belirtir" \
+                "kullanıcı adı yoksa ad. \ n" \
+                "-` {{mention}} `: bu sadece * bir kullanıcıdan * bahseder - onları ilk adıyla etiketler. \ n" \
+                "-` {{id}} `: bu, kullanıcının * kimliğini gösterir \ n" \
+                "-` {{count}} `: kullanıcının * üye numarasını * temsil eder. \ n" \
+                "-` {{chatname}} `: * mevcut sohbet adını * temsil eder. \ n" \
+                "\ nHer değişken, değiştirilecek` {{}} `ile çevrelenmelidir ZORUNLU \ n" \
+                "Hoş geldiniz iletileri de işaretlemeyi destekler, böylece herhangi bir öğeyi kalın / italik / kod / bağlantılar yapabilirsiniz." \
+                "Düğmeler de desteklenir, böylece hoş karşılamalarınızı hoş bir girişle harika hale getirebilirsiniz" \
+                "düğmeleri. \ n" \
+                "Kurallarınıza bağlantı veren bir düğme oluşturmak için şunu kullanın:` [Kurallar] (buttonurl: //t.me/ {}? Start = group_id) `." \
+                "Grup_kimliği" yerine grubunuzun kimliğini / id yoluyla edinilebilen bir kimlikle değiştirmeniz yeterlidir. \ "
+                "git. Grup kimlikleri genellikle önünde" -` işareti bulunur; bu gereklidir, bu yüzden lütfen yapma "\
+                "kaldır. \ n" \
+                "Eğlenceli hissediyorsanız, görüntüleri / gifleri / videoları / sesli mesajları bile hoş geldiniz mesajı olarak ayarlayabilirsiniz" \
+                "istenen medyaya yanıt vermek ve / setwelcome çağırmak.".format(dispatcher.bot.username)
 
 
 @run_async
@@ -495,29 +495,28 @@ def __migrate__(old_chat_id, new_chat_id):
 def __chat_settings__(chat_id, user_id):
     welcome_pref, _, _ = sql.get_welc_pref(chat_id)
     goodbye_pref, _, _ = sql.get_gdbye_pref(chat_id)
-    return "This chat has it's welcome preference set to `{}`.\n" \
+    return "Bu sohbetin hoş geldiniz tercihi `{}` olarak ayarlanmış. \ N "\
            "It's goodbye preference is `{}`.".format(welcome_pref, goodbye_pref)
 
 
 __help__ = """
 {}
 
-*Admin only:*
- - /welcome <on/off>: enable/disable welcome messages.
- - /welcome: shows current welcome settings.
- - /welcome noformat: shows current welcome settings, without the formatting - useful to recycle your welcome messages!
- - /goodbye -> same usage and args as /welcome.
- - /setwelcome <sometext>: set a custom welcome message. If used replying to media, uses that media.
- - /setgoodbye <sometext>: set a custom goodbye message. If used replying to media, uses that media.
- - /resetwelcome: reset to the default welcome message.
- - /resetgoodbye: reset to the default goodbye message.
- - /cleanwelcome <on/off>: On new member, try to delete the previous welcome message to avoid spamming the chat.
- - /clearjoin <on/off>: when someone joins, try to delete the *user* joined the group message.
- - /welcomehelp: view more formatting information for custom welcome/goodbye messages.
-
+* Yalnızca yönetici: *
+ - / welcome <on / off>: karşılama mesajlarını etkinleştirir / devre dışı bırakır.
+ - / welcome: geçerli karşılama ayarlarını gösterir.
+ - / welcome noformat: biçimlendirme olmadan mevcut karşılama ayarlarını gösterir - karşılama mesajlarınızı geri dönüştürmek için faydalıdır!
+ - / goodbye -> / welcome ile aynı kullanım ve argümanlar.
+ - / setwelcome <yazı>: özel bir karşılama mesajı ayarlamanızı sağlar. Medyaya yanıt olarak kullanılırsa, bu medyayı kullanır.
+ - / setgoodbye <yazı>: özel bir veda mesajı ayarlamanızı sağlar. Medyaya yanıt olarak kullanılırsa, bu medyayı kullanır.
+ - / resetwelcome: varsayılan karşılama mesajına sıfırla.
+ - / resetgoodbye: varsayılan güle güle mesajına sıfırla.
+ - / cleanwelcome <on / off>: Yeni üyede sohbeti spam etmemek için önceki hoş geldiniz iletisini silmeyi deneyin.
+ - / clearjoin <on / off>: birisi katıldığında, * mesajını * grup mesajına katıldı.
+ - / welcomehelp: özel karşılama / güle güle mesajları için daha fazla biçimlendirme bilgisi görüntüleyin.
 """.format(WELC_HELP_TXT)
 
-__mod_name__ = "Welcomes/Goodbyes"
+__mod_name__ = "hg/bb mesajı"
 
 NEW_MEM_HANDLER = MessageHandler(Filters.status_update.new_chat_members, new_member)
 LEFT_MEM_HANDLER = MessageHandler(Filters.status_update.left_chat_member, left_member)
