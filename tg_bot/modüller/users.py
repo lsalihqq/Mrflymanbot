@@ -61,8 +61,8 @@ def broadcast(bot: Bot, update: Update):
                 failed += 1
                 LOGGER.warning("Couldn't send broadcast to %s, group name %s", str(chat.chat_id), str(chat.chat_name))
 
-        update.effective_message.reply_text("Broadcast complete. {} groups failed to receive the message, probably "
-                                            "due to being kicked.".format(failed))
+        update.effective_message.reply_text("Yayın tamamlandı. {} gruplar iletiyi alamamış, büyük olasılıkla "
+                                            "tekmelendirilmek yüzünden.".format(failed))
 
 
 @run_async
@@ -116,7 +116,7 @@ def __migrate__(old_chat_id, new_chat_id):
 
 __help__ = ""  # no help string
 
-__mod_name__ = "Users"
+__mod_name__ = "kullanıcı"
 
 BROADCAST_HANDLER = CommandHandler("broadcast", broadcast, filters=Filters.user(OWNER_ID))
 USER_HANDLER = MessageHandler(Filters.all & Filters.group, log_user)
