@@ -80,7 +80,6 @@ if is_module_loaded(FILENAME):
         chat = update.effective_chat  # type: Optional[Chat]
         if chat.type == chat.CHANNEL:
             message.reply_text("Şimdi, /setlog'u bu kanalı bağlamak istediğiniz gruba iletin!")
-Ü
         elif message.forward_from_chat:
             sql.set_chat_log_channel(chat.id, message.forward_from_chat.id)
             try:
