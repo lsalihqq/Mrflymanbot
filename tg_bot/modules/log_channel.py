@@ -147,6 +147,7 @@ if is_module_loaded(FILENAME):
 - /logchannel: günlük kanal bilgilerini almak
 - /setlog: günlük kanalını ayarlama.
 - /unsetlog: günlük kanalının ayarını açma.
+
 Günlük kanalının ayarlanması aşağıdakiler tarafından yapılır:
 - istenilen kanala bot ekleme (bir yönetici olarak!)
 - Kanalda gönderme /setlog
