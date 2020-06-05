@@ -285,19 +285,18 @@ def __chat_settings__(chat_id, user_id):
 
 
 __help__ = """
- - /locktypes: a list of possible locktypes
-*Admin only:*
- - /lock <type>: lock items of a certain type (not available in private)
- - /unlock <type>: unlock items of a certain type (not available in private)
- - /locks: the current list of locks in this chat.
-Locks can be used to restrict a group's users.
-eg:
-Locking urls will auto-delete all messages with urls which haven't been whitelisted, locking stickers will delete all \
-stickers, etc.
-Locking bots will stop non-admins from adding bots to the chat.
+ - /locktypes: olası kilit türlerinin listesi
+*Yalnızca yönetici:*
+ - /lock <tip>: belirli bir türdeki kilit öğelerini (özel olarak kullanılamaz)
+ - /Unlock <tip>: belirli bir tür öğeleri kilidini (özel olarak kullanılamaz)
+ - /locks: bu sohbetteki kilitlerin geçerli listesi.
+Kilitler, bir grubun kullanıcılarını kısıtlamak için kullanılabilir.
+Örneğin:
+Url'leri kilitleme, beyaz listeye alınmamış url'li tüm iletileri otomatik olarak siler, çıkartmaları kilitlemek tüm \
+çıkartmalar, vb.
 """
 
-__mod_name__ = "Locks"
+__mod_name__ = "kilit"
 
 LOCKTYPES_HANDLER = DisableAbleCommandHandler("locktypes", locktypes)
 LOCK_HANDLER = CommandHandler("lock", lock, pass_args=True, filters=Filters.group)
