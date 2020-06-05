@@ -99,7 +99,7 @@ def leavechat(bot: Bot, update: Update, args: List[int]):
         chat_id = int(args[0])
         bot.leaveChat(chat_id)
     else:
-        update.effective_message.reply_text("Bir sohbeti kastediyor gibi görünmüyorsun.)
+        update.effective_message.reply_text("Bir sohbeti kastediyor gibi görünmüyorsun.")
 
 __help__ = """
 **Yalnızca yönetici: **
