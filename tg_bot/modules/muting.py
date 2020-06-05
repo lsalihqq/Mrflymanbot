@@ -182,6 +182,7 @@ __help__ = """
  - /mute <kullanıcı adı>: susturur
  - /tmute <kullanıcı adı> (dakika/saat/gün): zamanlı susturur
  - /unmute <kullnıcı adı>: sesini açar
+"""
 
 __mod_name__ = "sus"
 
