@@ -464,9 +464,7 @@ WELC_HELP_TXT = "Grubunuzun hoş geldiniz / hoşçakal iletileri birden çok şe
                 "düğmeleri. \ n" \
                 "Kurallarınıza bağlantı veren bir düğme oluşturmak için şunu kullanın:` [Kurallar] (buttonurl: //t.me/ {}? Start = group_id) `." \
                 "Grup_kimliği yerine grubunuzun kimliğini / id yoluyla edinilebilen bir kimlikle değiştirmeniz yeterlidir. \ "                              
-                "Eğlenceli hissediyorsanız, görüntüleri / gifleri / videoları / sesli mesajları bile hoş geldiniz mesajı olarak ayarlayabilirsiniz" \
-                "istenen medyaya yanıt vermek ve / setwelcome çağırmak.".format(dispatcher.bot.username)
-
+                
 
 @run_async
 @user_admin
