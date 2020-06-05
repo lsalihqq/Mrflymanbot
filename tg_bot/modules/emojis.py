@@ -76,8 +76,8 @@ love_siren = [
 
 
 hack_you = [
-            "Looking for WhatsApp databases in targeted person...",
-            " User online: True\nTelegram access: True\nRead Storage: True ",
+            "kişinin wp veritabanına giriliyor...",
+            " kullanıcı online ",
             "Hacking... 20.63%\n[███░░░░░░░░░░░░░░░░░]",    
             "Hacking... 86.21%\n[███████████████░░░░░]",
             "Hacking... 93.50%\n[█████████████████░░░]",
@@ -249,7 +249,7 @@ def bombs(bot: Bot, update: Update):
 @user_admin
 @run_async
 def hack(bot: Bot, update: Update):
-    msg = update.effective_message.reply_text('Target selected') 
+    msg = update.effective_message.reply_text('hedef seçildi') 
     for x in range(EDIT_TIMES):
         msg.edit_text(hack_you[x%5])
         time.sleep(EDIT_SLEEP)
@@ -300,6 +300,6 @@ dispatcher.add_handler(MOONANIMATION_HANDLER)
 dispatcher.add_handler(CLOCKANIMATION_HANDLER)
 
 
-__mod_name__ = "EMOJIS"
+__mod_name__ = "EMOJI"
 __command_list__ = ["love", "hack", "bombs", "moonanimation", "clockanimation", "earthanimation"]
 __handlers__ = [LOVE_HANDLER, HACK_HANDLER, BOMBS_HANDLER, MOONANIMATION_HANDLER, CLOCKANIMATION_HANDLER, EARTHANIMATION_HANDLER]
