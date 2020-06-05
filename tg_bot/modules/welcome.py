@@ -463,8 +463,8 @@ WELC_HELP_TXT = "Grubunuzun hoş geldiniz / hoşçakal iletileri birden çok şe
                 "Düğmeler de desteklenir, böylece hoş karşılamalarınızı hoş bir girişle harika hale getirebilirsiniz" \
                 "düğmeleri. \ n" \
                 "Kurallarınıza bağlantı veren bir düğme oluşturmak için şunu kullanın:` [Kurallar] (buttonurl: //t.me/ {}? Start = group_id) `." \
-                "Grup_kimliği" yerine grubunuzun kimliğini / id yoluyla edinilebilen bir kimlikle değiştirmeniz yeterlidir. \ "
-                "git. Grup kimlikleri genellikle önünde" -` işareti bulunur; bu gereklidir, bu yüzden lütfen yapma "\
+                "Grup_kimliği yerine grubunuzun kimliğini / id yoluyla edinilebilen bir kimlikle değiştirmeniz yeterlidir. \ "
+                "git. Grup kimlikleri genellikle önünde -` işareti bulunur; bu gereklidir, bu yüzden lütfen yapma "\
                 "kaldır. \ n" \
                 "Eğlenceli hissediyorsanız, görüntüleri / gifleri / videoları / sesli mesajları bile hoş geldiniz mesajı olarak ayarlayabilirsiniz" \
                 "istenen medyaya yanıt vermek ve / setwelcome çağırmak.".format(dispatcher.bot.username)
@@ -514,6 +514,7 @@ __help__ = """
  - / cleanwelcome <on / off>: Yeni üyede sohbeti spam etmemek için önceki hoş geldiniz iletisini silmeyi deneyin.
  - / clearjoin <on / off>: birisi katıldığında, * mesajını * grup mesajına katıldı.
  - / welcomehelp: özel karşılama / güle güle mesajları için daha fazla biçimlendirme bilgisi görüntüleyin.
+ 
 """.format(WELC_HELP_TXT)
 
 __mod_name__ = "hg/bb mesajı"
