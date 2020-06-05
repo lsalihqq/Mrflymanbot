@@ -37,7 +37,7 @@ def report_setting(bot: Bot, update: Update, args: List[str]):
         if len(args) >= 1:
             if args[0] in ("yes", "on"):
                 sql.set_chat_setting(chat.id, True)
-                msg.reply_text("Habercilik açık! Raporları açık olan yöneticiler , "rapor "
+                msg.reply_text("Habercilik açık! Raporları açık olan yöneticiler "
                                "veya @admin denir.")
 
             elif args[0] in ("no", "off"):
