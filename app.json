@@ -51,10 +51,6 @@
       "description": "A space separated list of user_ids which should be considered whitelisted - they can't be banned.",
       "value": "1146327429"
     },
-    "DONATION_LINK": {
-      "description": "Optional: link where you would like to receive donations.",
-      "value": "https://www.paypal.me/Your_id_here"
-    },
     "PORT": {
       "description": "Port to use for your webhooks",
       "value": "8443"
