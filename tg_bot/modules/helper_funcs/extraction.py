@@ -75,7 +75,7 @@ def extract_user_and_text(message: Message, args: List[str]) -> (Optional[int], 
         message.bot.get_chat(user_id)
     except BadRequest as excp:
         if excp.message in ("User_id_invalid", "Chat not found"):
-            message.reply_text("Ben daha önce bu kullanıcı ile etkileşim var gibi görünmüyor - " bir mesaj iletin lütfen
+            message.reply_text("Ben daha önce bu kullanıcı ile etkileşim var gibi görünmüyor - bir mesaj iletin lütfen " 
                                "bana kontrolü verecekler! (bir vudu bebek gibi, ben onları bir parça edebilmek için gerekir "
                                "bazı komutları uygulamak için...)")
         else:
