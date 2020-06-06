@@ -54,8 +54,8 @@ def bot_can_delete(func):
         if can_delete(update.effective_chat, bot.id):
             return func(bot, update, *args, **kwargs)
         else:
-            update.effective_message.reply_text("I can't delete messages here! "
-                                                "Make sure I'm admin and can delete other user's messages.")
+            update.effective_message.reply_text("Burada mesajları silemem! "
+                                                "Yönetici olduğumdan ve diğer kullanıcının iletilerini silebileceğimden emin olun.")
 
     return delete_rights
 
@@ -66,8 +66,8 @@ def can_pin(func):
         if update.effective_chat.get_member(bot.id).can_pin_messages:
             return func(bot, update, *args, **kwargs)
         else:
-            update.effective_message.reply_text("I can't pin messages here! "
-                                                "Make sure I'm admin and can pin messages.")
+            update.effective_message.reply_text("Mesajları buraya sabitleyemiyorum! "
+                                                "Yönetici olduğumdan ve iletileri sabitleyebildiğimden emin olun.")
 
     return pin_rights
 
@@ -78,8 +78,8 @@ def can_promote(func):
         if update.effective_chat.get_member(bot.id).can_promote_members:
             return func(bot, update, *args, **kwargs)
         else:
-            update.effective_message.reply_text("I can't promote/demote people here! "
-                                                "Make sure I'm admin and can appoint new admins.")
+            update.effective_message.reply_text("Buradaki insanları terfi ettiremem/düşüremem! "
+                                                "Yönetici olduğumdan ve yeni yöneticiler atayabileceğimden emin olun.")
 
     return promote_rights
 
