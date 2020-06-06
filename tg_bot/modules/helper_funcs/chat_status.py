@@ -90,8 +90,8 @@ def can_restrict(func):
         if update.effective_chat.get_member(bot.id).can_restrict_members:
             return func(bot, update, *args, **kwargs)
         else:
-            update.effective_message.reply_text("I can't restrict people here! "
-                                                "Make sure I'm admin and can appoint new admins.")
+            update.effective_message.reply_text("Burada insanları kısıtlayamam! "
+                                                "Yönetici olduğumdan ve yeni yöneticiler atayabildiğimden emin olun.")
 
     return promote_rights
 
@@ -102,7 +102,7 @@ def bot_admin(func):
         if is_bot_admin(update.effective_chat, bot.id):
             return func(bot, update, *args, **kwargs)
         else:
-            update.effective_message.reply_text("I'm not admin!")
+            update.effective_message.reply_text("yetki ver lan gevşek!")
 
     return is_admin
 
@@ -121,7 +121,7 @@ def user_admin(func):
             update.effective_message.delete()
 
         else:
-            update.effective_message.reply_text("Who dis non-admin telling me what to do?")
+            update.effective_message.reply_text("kim bana admin olmadan ne yapıcağımı söylüyor?")
 
     return is_admin
 
