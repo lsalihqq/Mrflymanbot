@@ -147,7 +147,7 @@ def unlock(bot: Bot, update: Update, args: List[str]) -> str:
         if len(args) >= 1:
             if args[0] in LOCK_TYPES:
                 sql.update_lock(chat.id, args[0], locked=False)
-                message.reply_text("Unlocked {} for everyone!".format(args[0]))
+                message.reply_text("Herkes için kilidi açık {}!".format(args[0]))
                 return "<b>{}:</b>" \
                        "\n#UNLOCK" \
                        "\n<b>Admin:</b> {}" \
@@ -177,10 +177,10 @@ def unlock(bot: Bot, update: Update, args: List[str]) -> str:
                        "\nUnlocked <code>{}</code>.".format(html.escape(chat.title),
                                                             mention_html(user.id, user.first_name), args[0])
             else:
-                message.reply_text("What are you trying to unlock...? Try /locktypes for the list of lockables")
+                message.reply_text("Neyi çözmeye çalışıyorsun...? Kilitlenebilirler listesi için /locktypes deneyin")
 
         else:
-            bot.sendMessage(chat.id, "What are you trying to unlock...?")
+            bot.sendMessage(chat.id, "Neyi çözmeye çalışıyorsun?..?")
 
     return ""
 
@@ -198,12 +198,12 @@ def del_lockables(bot: Bot, update: Update):
                 for new_mem in new_members:
                     if new_mem.is_bot:
                         if not is_bot_admin(chat, bot.id):
-                            message.reply_text("I see a bot, and I've been told to stop them joining... "
-                                               "but I'm not admin!")
+                            message.reply_text("Ben bir bot görmek ve onları katılmadan durdurmak için söylendi ... "
+                                               "ama ben yönetici değilim.!")
                             return
 
                         chat.kick_member(new_mem.id)
-                        message.reply_text("Only admins are allowed to add bots to this chat! Get outta here.")
+                        message.reply_text("Sadece yöneticiler bu sohbet e botlar eklemek için izin verilir! Buradan çık..")
             else:
                 try:
                     message.delete()
@@ -226,7 +226,7 @@ def rest_handler(bot: Bot, update: Update):
             try:
                 msg.delete()
             except BadRequest as excp:
-                if excp.message == "Message to delete not found":
+                if excp.message == "Silinecek ileti bulunamadı":
                     pass
                 else:
                     LOGGER.exception("ERROR in restrictions")
@@ -237,9 +237,9 @@ def build_lock_message(chat_id):
     locks = sql.get_locks(chat_id)
     restr = sql.get_restr(chat_id)
     if not (locks or restr):
-        res = "There are no current locks in this chat."
+        res = "Bu sohbette geçerli kilit yok."
     else:
-        res = "These are the locks in this chat:"
+        res = "Bunlar bu sohbetteki kilitler.:"
         if locks:
             res += "\n - sticker = `{}`" \
                    "\n - audio = `{}`" \
